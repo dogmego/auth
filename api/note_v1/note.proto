@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package note_v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+option go_package = "github.com/dogmego/MicroservicesPractice/Auth/pkg/note_v1";
+
+service NoteV1 {
+  rpc Create(CreateUserRequest) returns (CreateUserResponse);
+  rpc Get(GetUserRequest) returns (GetUserResponse);
+  rpc Update(UpdateUserInfo) returns (google.protobuf.Empty);
+  rpc Delete(DeleteUserRequest) returns (google.protobuf.Empty);
+}
+
+enum Role {
+  USER = 0;
+  ADMIN = 1;
+}
+
+// Запрос для создания нового пользователя
+message CreateUserRequest  {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+  string password_confirm = 4;
+  Role role = 5;
+}
+
+message CreateUserResponse {
+  int64 id = 1;
+}
+
+// запрос на получение информации о пользователей по id
+message GetUserRequest {
+  int64 id = 1;
+}
+
+message GetUserResponse {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+  Role role = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
+
+// запрос обновление инфы о пользователей
+message UpdateUserInfo {
+  int64 id = 1;
+  google.protobuf.StringValue name = 2;
+  google.protobuf.StringValue email = 3;
+}
+
+message UpdateUserResponse {
+}
+
+// запрос на удаление пользователя
+message DeleteUserRequest {
+  int64 id = 1;
+}
+
+message DeleteUserResponse {
+}
