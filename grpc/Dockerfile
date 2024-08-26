@@ -4,6 +4,7 @@ COPY . /github.com/dogmego/microservices_course/week_2/grpc/source/
 WORKDIR /github.com/dogmego/microservices_course/week_2/grpc/source/
 
 RUN go mod download
+RUN go mod tidy
 RUN go build -o ./bin/crud_server cmd/grpc_server/main.go
 
 FROM alpine:latest
