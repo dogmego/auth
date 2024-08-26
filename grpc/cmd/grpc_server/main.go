@@ -11,7 +11,7 @@ import (
 	"log"
 	"net"
 
-	desc "github.com/dogmego/MicroservicesPractice/Auth/pkg/note_v1"
+	desc "github.com/dogmego/MicroservicesPractice/Auth/grpc/pkg/note_v1"
 )
 
 const grpcPort = 50051
