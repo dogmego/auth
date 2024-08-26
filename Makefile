@@ -25,3 +25,14 @@ generate:
 clean:
 	del /q $(OUT_DIR)\*.pb.go
 
+build:
+	GOOS=linux GOARCH=amd64 go build -o service_linux cmd/grpc_server/main.go
+
+copy-to-server:
+	scp service_linux root@31.41.155.2:
+
+docker-build-and-push:
+	docker buildx build --no-cache --platform linux/amd64 -t cr.selcloud.ru/dogmego/test-server:v0.0.1 .
+	docker login -u token -p CRgAAAAA6Piyt8HACTD47uaBx83ULmV31rvgGDRx cr.selcloud.ru/dogmego
+	docker push cr.selcloud.ru/dogmego/test-server:v0.0.1
+
